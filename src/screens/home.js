@@ -6,12 +6,30 @@ import {
 } from 'react-native'
 import Header from '../components/header'
 import TouchableIcon from '../components/touchableIcon'
+import UsersList from '../components/usersList'
+import { addRandomBirthdayToUsers } from '../utils'
+
+import createClient from '../api'
+const api = createClient()
 
 
 export default class Home extends Component {
-  state = {}
+  state = {
+    users: []
+  }
+
+  componentWillMount () {
+    this._getUsers()
+  }
+
+  _getUsers = async () => {
+    const data = await api.getUsers()
+    const users = addRandomBirthdayToUsers(data)
+    this.setState({ users })
+  }
 
   render () {
+    const { users } = this.state
     return (
       <View style={styles.container}>
         <Header
@@ -26,6 +44,7 @@ export default class Home extends Component {
             />
           }
         />
+        <UsersList users={users} />
       </View>
     )
   }
