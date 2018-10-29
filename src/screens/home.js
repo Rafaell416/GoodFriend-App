@@ -5,6 +5,7 @@ import {
   StyleSheet
 } from 'react-native'
 import Header from '../components/header'
+import TouchableIcon from '../components/touchableIcon'
 
 
 export default class Home extends Component {
@@ -16,6 +17,14 @@ export default class Home extends Component {
         <Header
           title="Good Friend"
           backgroundColor="#35d0ba"
+          right={
+            <TouchableIcon
+              name="plus"
+              size={30}
+              color="white"
+              actionToExecuteWhenPress={() => console.log('hello cosmos')}
+            />
+          }
         />
       </View>
     )
