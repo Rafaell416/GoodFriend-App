@@ -3732,6 +3732,10 @@ react-native-screens@^1.0.0-alpha.11, react-native-screens@^1.0.0-alpha.5:
   version "1.0.0-alpha.15"
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-1.0.0-alpha.15.tgz#5b5a0041310b46f12048fda1908d52e7290ec18f"
 
+react-native-spotlight-input@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/react-native-spotlight-input/-/react-native-spotlight-input-0.0.8.tgz#932b61859ea115fd60093e6e31386ea0254ddcaf"
+
 react-native-svg@6.2.2:
   version "6.2.2"
   resolved "http://registry.npmjs.org/react-native-svg/-/react-native-svg-6.2.2.tgz#5803cddce374a542b4468c38a2474fca32080685"

@@ -2,7 +2,5 @@
 
 import Api from './lib/api'
 
-let api = null
-
-const createClient = ( config ) => !api ? api = new Api( config ) : api
+const createClient = ( config ) => new Api( config )
 export default createClient
