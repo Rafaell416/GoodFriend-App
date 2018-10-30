@@ -29,8 +29,8 @@ export default class Home extends Component {
     this.setState({ users })
   }
 
-  _createBirthday = async (user) => {
-
+  _createBirthdayInScreen = (user) => {
+    this.setState({ users: [ ...this.state.users, user ] })
   }
 
   _deleteBirthday = async () => {
@@ -52,7 +52,7 @@ export default class Home extends Component {
         <UsersList
           users={ users }
           navigation={ this.props.navigation }
-          handleCreateBirthday={ this._createBirthday }
+          handleCreateBirthday={ this._createBirthdayInScreen }
           handleDeleteBirthday={ this._deleteBirthday }
           handleUpdateBirthday={ this._updateBirthday }
         />

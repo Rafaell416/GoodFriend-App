@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {
   View,
   Text,
+  Alert,
   StyleSheet
 } from 'react-native'
 import Header from '../components/header'
@@ -11,11 +12,17 @@ import DatePicker from '../components/datePicker'
 import ActionButton from '../components/actionButton'
 import Preloader from '../components/preloader'
 
+import config from '../../config'
+
+import createClient from '../api'
+const api = createClient(config)
+
 export default class CreateUserBirthday extends Component {
   state = {
     first_name: '',
     last_name: '',
-    birthday: ''
+    birthday: '',
+    loading: false
   }
 
   _areAllInputsFilled = () => {
@@ -25,8 +32,24 @@ export default class CreateUserBirthday extends Component {
     return true
   }
 
+  _createBirthday = async () => {
+     this.setState({ loading: true })
+     const { first_name, last_name, birthday } = this.state
+
+     api.createBirthday({ first_name, last_name, birthday })
+     .then(res => {
+       this.props.navigation.state.params.handleCreateBirthday(res)
+       this.setState({ loading: false })
+       this.props.navigation.goBack()
+     })
+     .catch(err => {
+       Alert.alert('There was an error', 'Try again :/')
+       console.log(err)
+     })
+  }
+
   render () {
-    const { first_name, last_name } = this.state
+    const { first_name, last_name, loading } = this.state
     return (
       <View style={styles.container}>
         <Header
@@ -61,13 +84,17 @@ export default class CreateUserBirthday extends Component {
           handleOnDatePicked={( birthday ) => this.setState({ birthday })}
         />
         <View style={styles.buttonView}>
-          <ActionButton
-            text="SAVE"
-            textColor="white"
-            buttonColor="#ff9234"
-            actionToExecuteWhenPress={() => console.log('hello cosmos')}
-            disabled={this._areAllInputsFilled()}
-          />
+           {
+             loading
+              ? <Preloader size="large" color="#28a996"/>
+              : <ActionButton
+                text="SAVE"
+                textColor="white"
+                buttonColor="#ff9234"
+                actionToExecuteWhenPress={this._createBirthday}
+                disabled={this._areAllInputsFilled()}
+              />
+           }
         </View>
 
       </View>
@@ -80,7 +107,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white'
   },
-  datePicker: {
-    backgroundColor: 'red'
+  buttonView: {
+    padding: 20,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })
