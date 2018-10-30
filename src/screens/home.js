@@ -8,7 +8,7 @@ import {
 import Header from '../components/header'
 import TouchableIcon from '../components/touchableIcon'
 import UsersList from '../components/usersList'
-import { addRandomBirthdayToUsers } from '../utils'
+import { addRandomBirthdayToUsers, findAndUpdate } from '../utils'
 import config from '../../config'
 
 import createClient from '../api'
@@ -49,12 +49,23 @@ export default class Home extends Component {
     Alert.alert('Delete birthday', 'Are you sure you want to delete this birthday ?', [
       { text: 'Cancel', onPress: () => console.log('cancel pressed'), style: 'cancel' },
       { text: 'Delete', onPress: () => this.setState({ users: this.state.users.filter(u => u.id !== uid ) }) }
-
     ])
   }
 
-  _updateBirthday = async () => {
+  _updateBirthday = (user) => {
+    this.props.navigation.navigate(
+      'CreateUserBirthday',
+      {
+        isEding: true,
+        user,
+        handleOnEditFinish: this._handleOnEditFinish
+      }
+    )
+  }
 
+  _handleOnEditFinish = (user) => {
+    const updatedList = findAndUpdate(this.state.users, user)
+    this.setState({ users: updatedList })
   }
 
   render () {

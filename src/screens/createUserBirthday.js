@@ -22,7 +22,21 @@ export default class CreateUserBirthday extends Component {
     first_name: '',
     last_name: '',
     birthday: '',
-    loading: false
+    loading: false,
+    uid: '',
+    avatar: ''
+  }
+
+  componentWillMount () {
+    const { isEding } = this.props.navigation.state.params
+    if ( isEding ) {
+      this._handleLoadDataWhenEditing()
+    }
+  }
+
+  _handleLoadDataWhenEditing = () => {
+    const { user: { first_name, last_name, birthday, id, avatar } } = this.props.navigation.state.params
+    this.setState({ first_name, last_name, birthday, uid: id, avatar })
   }
 
   _areAllInputsFilled = () => {
@@ -30,6 +44,24 @@ export default class CreateUserBirthday extends Component {
     const check = first_name && last_name && birthday
     if ( check ) return false
     return true
+  }
+
+  _updateBirthday = async () => {
+    this.setState({ loading: true })
+    const { first_name, last_name, birthday, uid, avatar } = this.state
+
+    api.updateBirthday({ first_name, last_name, birthday, uid })
+    .then(res => {
+      if ( res.ok ) {
+        this.props.navigation.state.params.handleOnEditFinish({ first_name, last_name, birthday, id: uid, avatar  })
+        this.setState({ loading: false })
+        this.props.navigation.goBack()
+      }
+    })
+    .catch(err => {
+      Alert.alert('There was an error', 'Try again :/')
+      console.log(err)
+    })
   }
 
   _createBirthday = async () => {
@@ -49,21 +81,19 @@ export default class CreateUserBirthday extends Component {
   }
 
   render () {
-    const { first_name, last_name, loading } = this.state
+    const { first_name, last_name, loading, birthday } = this.state
+    const { isEding } = this.props.navigation.state.params
     return (
       <View style={styles.container}>
         <Header
-          title="Create Birthday"
+          title={ isEding ? 'Edit Birthday' : 'Create Birthday' }
           backgroundColor="#28a996"
           left= {
             <TouchableIcon
               name="arrow-left"
               size={30}
               color="white"
-              actionToExecuteWhenPress={() => {
-                //this.props.navigation.state.params.handleCreateBirthday()
-                this.props.navigation.goBack()
-              }}
+              actionToExecuteWhenPress={() => this.props.navigation.goBack()}
             />
           }
         />
@@ -81,6 +111,7 @@ export default class CreateUserBirthday extends Component {
           onChangeText={ last_name => this.setState({ last_name }) }
         />
         <DatePicker
+          value={ birthday }
           handleOnDatePicked={( birthday ) => this.setState({ birthday })}
         />
         <View style={styles.buttonView}>
@@ -91,7 +122,7 @@ export default class CreateUserBirthday extends Component {
                 text="SAVE"
                 textColor="white"
                 buttonColor="#ff9234"
-                actionToExecuteWhenPress={this._createBirthday}
+                actionToExecuteWhenPress={ isEding ? this._updateBirthday : this._createBirthday }
                 disabled={this._areAllInputsFilled()}
               />
            }

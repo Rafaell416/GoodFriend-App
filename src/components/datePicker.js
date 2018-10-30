@@ -7,14 +7,12 @@ import {
 } from 'react-native'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import { Feather } from '@expo/vector-icons'
-import PropTypes from 'prop-types'
 
 import { formatDate } from '../utils'
 
 export default class DatePicker extends Component {
   state = {
     isDateTimePickerVisible: false,
-    date: '',
     selected: false,
     initialText: 'Pick birthday'
   }
@@ -31,7 +29,8 @@ export default class DatePicker extends Component {
    }
 
   render () {
-    const { selected, date, initialText } = this.state
+    const { selected, initialText } = this.state
+    const { value } = this.props
     return (
       <View style={styles.container}>
         <View style={styles.iconView}>
@@ -40,8 +39,8 @@ export default class DatePicker extends Component {
         <View style={styles.inputView}>
           <TouchableOpacity style={styles.dateView} onPress={ this._showDateTimePicker }>
             {
-              selected
-                ? <Text style={styles.dateText}>{ date }</Text>
+              value
+                ? <Text style={styles.dateText}>{ value }</Text>
                 : <Text style={styles.initialText}>{ initialText }</Text>
             }
           </TouchableOpacity>
@@ -55,10 +54,6 @@ export default class DatePicker extends Component {
       </View>
     )
   }
-}
-
-DatePicker.propTypes = {
-  handleOnDatePicked:  PropTypes.fun
 }
 
 const styles = StyleSheet.create({

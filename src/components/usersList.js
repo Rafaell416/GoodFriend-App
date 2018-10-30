@@ -35,7 +35,11 @@ export default class UsersList extends Component {
     } else {
       return (
         <TouchableCard disabled >
-          <UserItem { ...item } handleDeleteBirthday={ this.props.handleDeleteBirthday }/>
+          <UserItem
+            { ...item }
+            handleDeleteBirthday={ this.props.handleDeleteBirthday }
+            handleUpdateBirthday={ this.props.handleUpdateBirthday }
+          />
         </TouchableCard>
       )
     }
@@ -47,6 +51,10 @@ export default class UsersList extends Component {
         <Text style={styles.headerText}>Friend's Birthdays</Text>
       </View>
     )
+  }
+
+  componentDidUpdate (prevProps, prevState, snapshot) {
+    //console.log(prevProps, prevState, snapshot)
   }
 
   render () {

@@ -50,8 +50,15 @@ class Api {
     }
   }
 
-  updateBirthday () {
-
+  async updateBirthday ( uid, first_name, last_name, birthday ) {
+    try {
+      const response = await fetch(`${this.config.api.endpoint}/${uid}`, {
+        method: 'PUT',
+      })
+      return response
+    } catch (e) {
+      this._handleError('There was an error at updateBirthday', e)
+    }
   }
 
   _handleError (msg, error) {

@@ -17,7 +17,7 @@ import {
 const AVATAR_SIZE = 70
 
 
-function UserItem ({ avatar, first_name, last_name, birthday, id, handleDeleteBirthday }) {
+function UserItem ({ avatar, first_name, last_name, birthday, id, handleDeleteBirthday, handleUpdateBirthday }) {
   return (
     <View style={styles.container}>
       <View style={styles.avatarView}>
@@ -29,7 +29,7 @@ function UserItem ({ avatar, first_name, last_name, birthday, id, handleDeleteBi
             </MenuTrigger>
             <MenuOptions>
               <MenuOption value={1} text="Delete" onSelect={() => handleDeleteBirthday(id) }/>
-              <MenuOption value={2} text="Edit" onSelect={()=>this._reportarPost()}/>
+              <MenuOption value={2} text="Edit" onSelect={() => handleUpdateBirthday({ first_name, last_name, birthday, id, avatar })}/>
             </MenuOptions>
           </Menu>
         </View>
