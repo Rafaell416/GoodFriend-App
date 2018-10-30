@@ -16,3 +16,13 @@ function getRandomDate () {
 export function addRandomBirthdayToUsers (users) {
   return users.map(user => ({ ...user, birthday: getRandomDate() }))
 }
+
+export function formatDate (date) {
+  const stringDate = String( date )
+  const baseDate = new Date( stringDate )
+
+  const day = baseDate.getDate()
+  const month = monthNames[baseDate.getMonth()] 
+
+  return `${month}, ${day} `
+}

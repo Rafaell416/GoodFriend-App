@@ -1,31 +1,64 @@
 'use strict'
-import options from '../../../config'
 
 class Api {
-  construtor( config ){
-    this.config = config || options
+  constructor(config){
+    this.config = config
   }
 
   async getUsers () {
     try {
-      const response = await fetch('https://reqres.in/api/users')
+      const response = await fetch( this.config.api.endpoint )
       const data = await response.json()
       return data.data
     } catch (e) {
-      _handleError('There was an error at getBirthdays', e)
+      this._handleError('There was an error at getBirthdays', e)
     }
   }
 
-  createBirthday () {
+  async createBirthday (user) {
+    try {
+      const { first_name, last_name, birthday } = user
+      const response =  await fetch( this.config.api.endpoint , {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          first_name,
+          last_name,
+          birthday,
+          avatar: this.config.mock.staticAvatar
+        }),
+      })
 
+      const data = await response.json()
+      return data
+    } catch (e) {
+      this._handleError('There was an error at createBirthday', e)
+    }
   }
 
-  deleteBirthday () {
-
+  async deleteBirthday (uid) {
+    try {
+      const response = await fetch( `${this.config.api.endpoint}/${uid}`, {
+        method: 'DELETE'
+      })
+      return response
+    } catch (e) {
+      this._handleError('There was an error at deleteBirthday', e)
+    }
   }
 
-  updateBirthday () {
-
+  async updateBirthday ( uid, first_name, last_name, birthday ) {
+    try {
+      const response = await fetch(`${this.config.api.endpoint}/${uid}`, {
+        method: 'PUT',
+      })
+      return response
+    } catch (e) {
+      this._handleError('There was an error at updateBirthday', e)
+    }
   }
 
   _handleError (msg, error) {

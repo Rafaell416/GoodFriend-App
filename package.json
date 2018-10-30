@@ -1,7 +1,7 @@
 {
-  "name": "empty-project-template",
+  "name": "GoodFriend",
   "main": "node_modules/expo/AppEntry.js",
-  "private": true,
+  "private": false,
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -13,6 +13,9 @@
     "prop-types": "^15.6.2",
     "react": "16.3.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
+    "react-native-modal-datetime-picker": "^6.0.0",
+    "react-native-popup-menu": "^0.14.0",
+    "react-native-spotlight-input": "^0.0.8",
     "react-navigation": "^2.18.2"
   }
 }
