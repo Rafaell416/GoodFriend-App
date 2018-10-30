@@ -34,15 +34,7 @@ export default class Home extends Component {
       <View style={styles.container}>
         <Header
           title="Good Friend"
-          backgroundColor="#35d0ba"
-          right={
-            <TouchableIcon
-              name="plus"
-              size={30}
-              color="white"
-              actionToExecuteWhenPress={() => console.log('hello cosmos')}
-            />
-          }
+          backgroundColor="#28a996"
         />
         <UsersList users={users} />
       </View>

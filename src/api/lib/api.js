@@ -12,7 +12,7 @@ class Api {
       const data = await response.json()
       return data.data
     } catch (e) {
-      _handleError('There was an error at getBirthdays', e)
+      this._handleError('There was an error at getBirthdays', e)
     }
   }
 
