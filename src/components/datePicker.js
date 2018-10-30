@@ -57,6 +57,10 @@ export default class DatePicker extends Component {
   }
 }
 
+DatePicker.propTypes = {
+  handleOnDatePicked:  PropTypes.fun
+}
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',

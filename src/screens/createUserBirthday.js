@@ -8,18 +8,25 @@ import Header from '../components/header'
 import TouchableIcon from '../components/touchableIcon'
 import InputField from '../components/inputField'
 import DatePicker from '../components/datePicker'
+import ActionButton from '../components/actionButton'
+import Preloader from '../components/preloader'
 
 export default class CreateUserBirthday extends Component {
   state = {
-    user: {
-      first_name: '',
-      last_name: '',
-      birthday: ''
-    }
+    first_name: '',
+    last_name: '',
+    birthday: ''
+  }
+
+  _areAllInputsFilled = () => {
+    const { first_name, last_name, birthday } = this.state
+    const check = first_name && last_name && birthday
+    if ( check ) return false
+    return true
   }
 
   render () {
-    const { first_name, last_name } = this.state.user
+    const { first_name, last_name } = this.state
     return (
       <View style={styles.container}>
         <Header
@@ -42,18 +49,24 @@ export default class CreateUserBirthday extends Component {
           icon="user"
           placeholder="First name"
           value={ first_name }
-          onChangeText={ first_name => this.setState({ user: { first_name } }) }
+          onChangeText={ first_name => this.setState({ first_name }) }
         />
         <InputField
           icon="user-plus"
           placeholder="Last name"
           value={ last_name }
-          onChangeText={ last_name => this.setState({ user: { last_name } }) }
+          onChangeText={ last_name => this.setState({ last_name }) }
         />
-
-        <View style={styles.datePicker}>
-          <DatePicker
-            handleOnDatePicked={( birthday ) => this.setState({ user: { birthday } })}
+        <DatePicker
+          handleOnDatePicked={( birthday ) => this.setState({ birthday })}
+        />
+        <View style={styles.buttonView}>
+          <ActionButton
+            text="SAVE"
+            textColor="white"
+            buttonColor="#ff9234"
+            actionToExecuteWhenPress={() => console.log('hello cosmos')}
+            disabled={this._areAllInputsFilled()}
           />
         </View>
 
