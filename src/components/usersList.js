@@ -34,8 +34,8 @@ export default class UsersList extends Component {
       )
     } else {
       return (
-        <TouchableCard actionToExecute={() => console.log('go to detail')}>
-          <UserItem { ...item } />
+        <TouchableCard disabled >
+          <UserItem { ...item } handleDeleteBirthday={ this.props.handleDeleteBirthday }/>
         </TouchableCard>
       )
     }

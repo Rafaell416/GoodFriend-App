@@ -6,13 +6,33 @@ import {
   Image
 } from 'react-native'
 import PropTypes from 'prop-types'
+import { Feather } from '@expo/vector-icons'
+import {
+  Menu,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+} from 'react-native-popup-menu'
+
 const AVATAR_SIZE = 70
 
-function UserItem ({ avatar, first_name, last_name, birthday }) {
+
+function UserItem ({ avatar, first_name, last_name, birthday, id, handleDeleteBirthday }) {
   return (
     <View style={styles.container}>
       <View style={styles.avatarView}>
         <Image source={{ uri: avatar }} style={styles.avatar} fadeDuration={0} />
+        <View style={styles.moreView}>
+          <Menu>
+            <MenuTrigger>
+              <Feather name="more-vertical" size={20} color="#28a996"/>
+            </MenuTrigger>
+            <MenuOptions>
+              <MenuOption value={1} text="Delete" onSelect={() => handleDeleteBirthday(id) }/>
+              <MenuOption value={2} text="Edit" onSelect={()=>this._reportarPost()}/>
+            </MenuOptions>
+          </Menu>
+        </View>
       </View>
       <View style={styles.fullNameView}>
         <Text style={styles.name}>{ first_name }</Text>
@@ -72,6 +92,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     color: 'white'
+  },
+  moreView: {
+    position: 'absolute',
+    top: 0,
+    right: 0
   }
 })
 

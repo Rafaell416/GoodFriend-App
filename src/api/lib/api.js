@@ -28,7 +28,7 @@ class Api {
           first_name,
           last_name,
           birthday,
-          avatar: this.config.mock.staticAvatar 
+          avatar: this.config.mock.staticAvatar
         }),
       })
 
@@ -39,8 +39,15 @@ class Api {
     }
   }
 
-  deleteBirthday () {
-
+  async deleteBirthday (uid) {
+    try {
+      const response = await fetch( `${this.config.api.endpoint}/${uid}`, {
+        method: 'DELETE'
+      })
+      return response
+    } catch (e) {
+      this._handleError('There was an error at deleteBirthday', e)
+    }
   }
 
   updateBirthday () {
