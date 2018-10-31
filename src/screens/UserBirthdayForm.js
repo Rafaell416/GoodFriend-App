@@ -17,7 +17,7 @@ import config from '../../config'
 import createClient from '../api'
 const api = createClient(config)
 
-export default class CreateUserBirthday extends Component {
+export default class UserBirthdayForm extends Component {
   state = {
     first_name: '',
     last_name: '',

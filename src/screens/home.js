@@ -56,7 +56,7 @@ export default class Home extends Component {
 
   _updateBirthday = (user) => {
     this.props.navigation.navigate(
-      'CreateUserBirthday',
+      'UserBirthdayForm',
       {
         isEditing: true,
         user,
@@ -67,7 +67,7 @@ export default class Home extends Component {
 
   _goToCreateBirthdayScreen = () => {
     this.props.navigation.navigate(
-      'CreateUserBirthday',
+      'UserBirthdayForm',
       { handleCreateBirthday: this._createBirthdayInScreen }
     )
   }

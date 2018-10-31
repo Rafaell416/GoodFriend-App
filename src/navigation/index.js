@@ -3,11 +3,11 @@
 import React from 'react'
 import { createStackNavigator } from 'react-navigation'
 import Home from '../screens/Home'
-import CreateUserBirthday from '../screens/CreateUserBirthday'
+import UserBirthdayForm from '../screens/UserBirthdayForm'
 
 const AppNavigation = createStackNavigator({
   Home: { screen: Home },
-  CreateUserBirthday: { screen: CreateUserBirthday }
+  UserBirthdayForm: { screen: UserBirthdayForm }
 })
 
 export default AppNavigation
