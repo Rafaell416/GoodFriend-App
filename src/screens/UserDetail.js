@@ -1,42 +1,16 @@
 import React, { Component } from 'react'
 import {
   View,
-  Text,
   StyleSheet,
   Image
 } from 'react-native'
-import Header from '../components/Header'
-import TouchableIcon from '../components/TouchableIcon'
 import SubHeader from '../components/SubHeader'
-import { Feather } from '@expo/vector-icons'
 import { theme } from '../utils'
-import {
-  Menu,
-  MenuOptions,
-  MenuOption,
-  MenuTrigger,
-} from 'react-native-popup-menu'
 
 const AVATAR_SIZE = 150
 const AVATAR_VIEW_SIZE = AVATAR_SIZE + 10
 
 export default class UserDetail extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    header: (
-      <Header 
-        title="Detail" 
-        backgroundColor={theme.primaryColor}
-        left= {
-          <TouchableIcon
-            name="arrow-left"
-            size={30}
-            color="white"
-            actionToExecuteWhenPress={() => navigation.goBack()}
-          />
-        }
-      />
-    )
-  })
 
   render () {
     const { first_name, last_name, avatar, birthday } = this.props.navigation.state.params.user

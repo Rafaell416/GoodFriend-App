@@ -13,10 +13,6 @@ class Home extends Component {
     users: []
   }
 
-  static navigationOptions = {
-    header: <Header title="Good Friend" backgroundColor={theme.primaryColor} /> 
-  }
-
   _goToScreen = ({ screen, params }) => {
     this.props.navigation.navigate( screen, params )
   }
@@ -44,5 +40,5 @@ const styles = StyleSheet.create({
   }
 })
 
-
 export default withApiService(Home)
+
