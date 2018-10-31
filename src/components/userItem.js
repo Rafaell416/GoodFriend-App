@@ -3,7 +3,8 @@ import {
   View,
   Text,
   StyleSheet,
-  Image
+  Image,
+  TouchableOpacity
 } from 'react-native'
 import PropTypes from 'prop-types'
 import { Feather } from '@expo/vector-icons'
@@ -18,9 +19,19 @@ import {
 const AVATAR_SIZE = 70
 
 
-function UserItem ({ avatar, first_name, last_name, birthday, id, handleDeleteBirthday, handleUpdateBirthday }) {
+function UserItem ({ avatar, first_name, last_name, birthday, id, handleDeleteBirthday, handleUpdateBirthday, handleNavigateToScreen }) {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity 
+      style={styles.container}
+      onPress={() => handleNavigateToScreen({ 
+        screen: 'UserDetail', 
+        params: {
+          user: { avatar, first_name, last_name, birthday, id },
+          handleDeleteBirthday, 
+          handleUpdateBirthday
+        }
+      })}
+    >
       <View style={styles.avatarView}>
         <Image source={{ uri: avatar }} style={styles.avatar} fadeDuration={0} />
         <View style={styles.moreView}>
@@ -43,7 +54,7 @@ function UserItem ({ avatar, first_name, last_name, birthday, id, handleDeleteBi
       <View style={styles.birthdayTextView}>
         <Text style={styles.birthdayText}>{ birthday }</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 

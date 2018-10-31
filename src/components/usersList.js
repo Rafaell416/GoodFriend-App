@@ -20,7 +20,10 @@ export default class UsersList extends Component {
   _renderItem = ({ item, index }) => {
     if ( index === 0 ) {
       return (
-        <TouchableCard actionToExecute={ this.props.handleNavigateToCreateBirthday }
+        <TouchableCard actionToExecute={ () => this.props.handleNavigateToScreen({
+          screen: 'UserBirthdayForm',
+          params: { handleCreateBirthday: this.props.handleCreateBirthday }
+        })}
         >
           <View style={styles.addBirthdayView}>
             <Feather name="plus" size={40} color={theme.primaryColor}/>
@@ -35,6 +38,7 @@ export default class UsersList extends Component {
             { ...item }
             handleDeleteBirthday={ this.props.handleDeleteBirthday }
             handleUpdateBirthday={ this.props.handleUpdateBirthday }
+            handleNavigateToScreen={ this.props.handleNavigateToScreen }
           />
         </TouchableCard>
       )
