@@ -65,6 +65,13 @@ export default class Home extends Component {
     )
   }
 
+  _goToCreateBirthdayScreen = () => {
+    this.props.navigation.navigate(
+      'CreateUserBirthday',
+      { handleCreateBirthday: this._createBirthdayInScreen }
+    )
+  }
+
   _handleOnEditFinish = (user) => {
     const updatedList = findAndUpdate(this.state.users, user)
     this.setState({ users: updatedList })
@@ -76,8 +83,7 @@ export default class Home extends Component {
       <View style={styles.container}>
         <UsersList
           users={ users }
-          navigation={ this.props.navigation }
-          handleCreateBirthday={ this._createBirthdayInScreen }
+          handleNavigateToCreateBirthday={ this._goToCreateBirthdayScreen }
           handleDeleteBirthday={ this._deleteBirthday }
           handleUpdateBirthday={ this._updateBirthday }
         />

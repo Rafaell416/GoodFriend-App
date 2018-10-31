@@ -19,12 +19,7 @@ export default class UsersList extends Component {
   _renderItem = ({ item, index }) => {
     if ( index === 0 ) {
       return (
-        <TouchableCard actionToExecute={() => {
-            this.props.navigation.navigate(
-              'CreateUserBirthday',
-              { handleCreateBirthday: this.props.handleCreateBirthday }
-            )
-          }}
+        <TouchableCard actionToExecute={ this.props.handleNavigateToCreateBirthday }
         >
           <View style={styles.addBirthdayView}>
             <Feather name="plus" size={40} color="#28a996"/>
