@@ -11,11 +11,7 @@ import DatePicker from '../components/DatePicker'
 import ActionButton from '../components/ActionButton'
 import Preloader from '../components/Preloader'
 import { theme } from '../utils'
-
-import config from '../../config'
-
-import createClient from '../api'
-const api = createClient(config)
+import api from '../api'
 
 export default class UserBirthdayForm extends Component {
   state = {

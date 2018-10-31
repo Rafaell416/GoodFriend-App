@@ -7,10 +7,7 @@ import {
 import Header from '../components/Header'
 import UsersList from '../components/UsersList'
 import { addRandomBirthdayToUsers, findAndUpdate, theme } from '../utils'
-import config from '../../config'
-
-import createClient from '../api'
-const api = createClient(config)
+import api from '../api'
 
 
 export default class Home extends Component {
@@ -65,11 +62,8 @@ export default class Home extends Component {
     )
   }
 
-  _goToCreateBirthdayScreen = () => {
-    this.props.navigation.navigate(
-      'UserBirthdayForm',
-      { handleCreateBirthday: this._createBirthdayInScreen }
-    )
+  _goToScreen = ({ screen, params }) => {
+    this.props.navigation.navigate( screen, params )
   }
 
   _handleOnEditFinish = (user) => {
@@ -83,7 +77,8 @@ export default class Home extends Component {
       <View style={styles.container}>
         <UsersList
           users={ users }
-          handleNavigateToCreateBirthday={ this._goToCreateBirthdayScreen }
+          handleNavigateToScreen={ this._goToScreen }
+          handleCreateBirthday={ this._createBirthdayInScreen }
           handleDeleteBirthday={ this._deleteBirthday }
           handleUpdateBirthday={ this._updateBirthday }
         />
