@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import {
   View,
-  Text,
   Alert,
   StyleSheet
 } from 'react-native'
+import Header from '../components/Header'
 import UsersList from '../components/UsersList'
 import { addRandomBirthdayToUsers, findAndUpdate } from '../utils'
 import config from '../../config'
@@ -16,6 +16,10 @@ const api = createClient(config)
 export default class Home extends Component {
   state = {
     users: []
+  }
+
+  static navigationOptions = {
+    header: <Header title="Good Friend" backgroundColor="#28a996"/>
   }
 
   componentWillMount () {
@@ -54,7 +58,7 @@ export default class Home extends Component {
     this.props.navigation.navigate(
       'CreateUserBirthday',
       {
-        isEding: true,
+        isEditing: true,
         user,
         handleOnEditFinish: this._handleOnEditFinish
       }

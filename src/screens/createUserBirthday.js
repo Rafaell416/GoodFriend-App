@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import {
   View,
-  Text,
   Alert,
   StyleSheet
 } from 'react-native'
+import Header from '../components/Header'
+import TouchableIcon from '../components/TouchableIcon'
 import InputField from '../components/InputField'
 import DatePicker from '../components/DatePicker'
 import ActionButton from '../components/ActionButton'
@@ -25,9 +26,28 @@ export default class CreateUserBirthday extends Component {
     avatar: ''
   }
 
+  static navigationOptions = ({ navigation }) => ({
+    header: (
+      <Header 
+        title={ 
+          navigation.state.params.isEditing ? 'Edit Birthday' : 'Create Birthday' 
+        } 
+        backgroundColor="#28a996"
+        left= {
+          <TouchableIcon
+            name="arrow-left"
+            size={30}
+            color="white"
+            actionToExecuteWhenPress={() => navigation.goBack()}
+          />
+        }
+      />
+    )
+  })
+
   componentWillMount () {
-    const { isEding } = this.props.navigation.state.params
-    if ( isEding ) {
+    const { isEditing } = this.props.navigation.state.params
+    if ( isEditing ) {
       this._handleLoadDataWhenEditing()
     }
   }
@@ -80,7 +100,7 @@ export default class CreateUserBirthday extends Component {
 
   render () {
     const { first_name, last_name, loading, birthday } = this.state
-    const { isEding } = this.props.navigation.state.params
+    const { isEditing } = this.props.navigation.state.params
     return (
       <View style={styles.container}>
         <InputField
@@ -107,7 +127,7 @@ export default class CreateUserBirthday extends Component {
                 text="SAVE"
                 textColor="white"
                 buttonColor="#ff9234"
-                actionToExecuteWhenPress={ isEding ? this._updateBirthday : this._createBirthday }
+                actionToExecuteWhenPress={ isEditing ? this._updateBirthday : this._createBirthday }
                 disabled={this._areAllInputsFilled()}
               />
            }

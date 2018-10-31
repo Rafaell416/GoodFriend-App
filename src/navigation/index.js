@@ -6,31 +6,8 @@ import Home from '../screens/Home'
 import CreateUserBirthday from '../screens/CreateUserBirthday'
 
 const AppNavigation = createStackNavigator({
-  Home: { 
-    screen: Home,
-    navigationOptions: {
-      title: 'Good Friend',
-      headerStyle: {
-        backgroundColor: '#28a996',
-      },
-      headerTitleStyle: {
-        color: 'white'
-      },
-    }
-  },
-  CreateUserBirthday: { 
-    screen: CreateUserBirthday,
-    navigationOptions: {
-      title: 'Create Brithday',
-      headerStyle: {
-        backgroundColor: '#28a996'
-      },
-      headerTitleStyle: {
-        color: 'white'
-      },
-      headerTintColor: 'white',
-    }
-  }
+  Home: { screen: Home },
+  CreateUserBirthday: { screen: CreateUserBirthday }
 })
 
 export default AppNavigation
