@@ -13,7 +13,6 @@ import { formatDate } from '../utils'
 export default class DatePicker extends Component {
   state = {
     isDateTimePickerVisible: false,
-    selected: false,
     initialText: 'Pick birthday'
   }
 
@@ -23,13 +22,13 @@ export default class DatePicker extends Component {
 
   _handleDatePicked = (date) => {
      const formatedDate = formatDate( date )
-     this.setState({ date: formatedDate, selected: true })
+     this.setState({ date: formatedDate })
      this._hideDateTimePicker()
      this.props.handleOnDatePicked( formatedDate )
    }
 
   render () {
-    const { selected, initialText } = this.state
+    const { initialText } = this.state
     const { value } = this.props
     return (
       <View style={styles.container}>

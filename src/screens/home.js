@@ -5,9 +5,7 @@ import {
   Alert,
   StyleSheet
 } from 'react-native'
-import Header from '../components/header'
-import TouchableIcon from '../components/touchableIcon'
-import UsersList from '../components/usersList'
+import UsersList from '../components/UsersList'
 import { addRandomBirthdayToUsers, findAndUpdate } from '../utils'
 import config from '../../config'
 
@@ -72,10 +70,6 @@ export default class Home extends Component {
     const { users } = this.state
     return (
       <View style={styles.container}>
-        <Header
-          title="Good Friend"
-          backgroundColor="#28a996"
-        />
         <UsersList
           users={ users }
           navigation={ this.props.navigation }

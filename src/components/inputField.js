@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import TextInput from 'react-native-spotlight-input'
 import {
   View,
-  Text,
   StyleSheet
 } from 'react-native'
 

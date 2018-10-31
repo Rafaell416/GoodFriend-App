@@ -8,9 +8,9 @@ import {
 import PropTypes from 'prop-types'
 import { Feather } from '@expo/vector-icons'
 
-import TouchableCard from './touchableCard'
-import UserItem from './userItem'
-import Preloader from './preloader'
+import TouchableCard from './TouchableCard'
+import UserItem from './UserItem'
+import Preloader from './Preloader'
 
 export default class UsersList extends Component {
 
@@ -53,9 +53,6 @@ export default class UsersList extends Component {
     )
   }
 
-  componentDidUpdate (prevProps, prevState, snapshot) {
-    //console.log(prevProps, prevState, snapshot)
-  }
 
   render () {
     const { users } = this.props

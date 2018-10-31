@@ -5,12 +5,10 @@ import {
   Alert,
   StyleSheet
 } from 'react-native'
-import Header from '../components/header'
-import TouchableIcon from '../components/touchableIcon'
-import InputField from '../components/inputField'
-import DatePicker from '../components/datePicker'
-import ActionButton from '../components/actionButton'
-import Preloader from '../components/preloader'
+import InputField from '../components/InputField'
+import DatePicker from '../components/DatePicker'
+import ActionButton from '../components/ActionButton'
+import Preloader from '../components/Preloader'
 
 import config from '../../config'
 
@@ -85,19 +83,6 @@ export default class CreateUserBirthday extends Component {
     const { isEding } = this.props.navigation.state.params
     return (
       <View style={styles.container}>
-        <Header
-          title={ isEding ? 'Edit Birthday' : 'Create Birthday' }
-          backgroundColor="#28a996"
-          left= {
-            <TouchableIcon
-              name="arrow-left"
-              size={30}
-              color="white"
-              actionToExecuteWhenPress={() => this.props.navigation.goBack()}
-            />
-          }
-        />
-
         <InputField
           icon="user"
           placeholder="First name"
