@@ -109,14 +109,14 @@ export default class UserBirthdayForm extends Component {
           placeholder="First name"
           value={ first_name }
           onChangeText={ first_name => this.setState({ first_name }) }
-          iconColor={ theme.primaryColor }
+          themeColor={ theme.primaryColor }
         />
         <InputField
           icon="user-plus"
           placeholder="Last name"
           value={ last_name }
           onChangeText={ last_name => this.setState({ last_name }) }
-          iconColor={ theme.primaryColor }
+          themeColor={ theme.primaryColor }
         />
         <DatePicker
           value={ birthday }

@@ -1,33 +1,27 @@
 import React from 'react'
 import { Feather } from '@expo/vector-icons'
 import PropTypes from 'prop-types'
-import TextInput from 'react-native-spotlight-input'
+import { TextInput } from 'react-native-paper'
 import {
   View,
   StyleSheet
 } from 'react-native'
 
-function InputField ({ icon, value, onChangeText, placeholder, type, iconColor }) {
+function InputField ({ icon, value, onChangeText, placeholder, type, themeColor }) {
   const secure = type === 'password' ? true : false
   return (
     <View style={styles.container}>
       <View style={styles.iconView}>
-        <Feather name={icon} size={30} color={iconColor}/>
+        <Feather name={icon} size={30} color={themeColor}/>
       </View>
       <View style={styles.inputView}>
         <TextInput
           placeholder={placeholder}
           value={value}
           onChangeText={text => onChangeText(text)}
-          underlineColorAndroid="transparent"
           secureTextEntry={secure}
-          overlayColor="#28a996"
-          header={() => <View style={styles.header}/>}
           style={styles.input}
-          animationConfig={{
-            duration:350,
-            delay: 100,
-          }}
+          theme={{ colors: { primary: themeColor }}}
         />
       </View>
     </View>
