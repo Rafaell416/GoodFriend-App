@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import {
   View,
-  Text,
   Alert,
   StyleSheet
 } from 'react-native'
-import Header from '../components/header'
-import TouchableIcon from '../components/touchableIcon'
-import UsersList from '../components/usersList'
-import { addRandomBirthdayToUsers, findAndUpdate } from '../utils'
+import Header from '../components/Header'
+import UsersList from '../components/UsersList'
+import { addRandomBirthdayToUsers, findAndUpdate, theme } from '../utils'
 import config from '../../config'
 
 import createClient from '../api'
@@ -18,6 +16,10 @@ const api = createClient(config)
 export default class Home extends Component {
   state = {
     users: []
+  }
+
+  static navigationOptions = {
+    header: <Header title="Good Friend" backgroundColor={theme.primaryColor} />
   }
 
   componentWillMount () {
@@ -54,12 +56,19 @@ export default class Home extends Component {
 
   _updateBirthday = (user) => {
     this.props.navigation.navigate(
-      'CreateUserBirthday',
+      'UserBirthdayForm',
       {
-        isEding: true,
+        isEditing: true,
         user,
         handleOnEditFinish: this._handleOnEditFinish
       }
+    )
+  }
+
+  _goToCreateBirthdayScreen = () => {
+    this.props.navigation.navigate(
+      'UserBirthdayForm',
+      { handleCreateBirthday: this._createBirthdayInScreen }
     )
   }
 
@@ -72,14 +81,9 @@ export default class Home extends Component {
     const { users } = this.state
     return (
       <View style={styles.container}>
-        <Header
-          title="Good Friend"
-          backgroundColor="#28a996"
-        />
         <UsersList
           users={ users }
-          navigation={ this.props.navigation }
-          handleCreateBirthday={ this._createBirthdayInScreen }
+          handleNavigateToCreateBirthday={ this._goToCreateBirthdayScreen }
           handleDeleteBirthday={ this._deleteBirthday }
           handleUpdateBirthday={ this._updateBirthday }
         />

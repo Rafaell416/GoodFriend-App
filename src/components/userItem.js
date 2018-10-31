@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 import PropTypes from 'prop-types'
 import { Feather } from '@expo/vector-icons'
+import { theme } from '../utils'
 import {
   Menu,
   MenuOptions,
@@ -25,7 +26,7 @@ function UserItem ({ avatar, first_name, last_name, birthday, id, handleDeleteBi
         <View style={styles.moreView}>
           <Menu>
             <MenuTrigger>
-              <Feather name="more-vertical" size={20} color="#28a996"/>
+              <Feather name="more-vertical" size={20} color={theme.primaryColor}/>
             </MenuTrigger>
             <MenuOptions>
               <MenuOption value={1} text="Delete" onSelect={() => handleDeleteBirthday(id) }/>
@@ -72,11 +73,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     margin: 5,
-    color: '#28a996'
+    color: theme.primaryColor
   },
   separator: {
     height: 3,
-    backgroundColor: '#ff9234',
+    backgroundColor: theme.orange,
     width: '100%',
     borderRadius: 5
   },
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#28a996',
+    backgroundColor: theme.primaryColor,
     borderBottomLeftRadius: 5,
     borderBottomRightRadius: 5
   },

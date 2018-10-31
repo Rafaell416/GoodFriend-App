@@ -1,15 +1,13 @@
 'use strict'
 
 import React from 'react'
-import { createSwitchNavigator, createStackNavigator } from 'react-navigation'
-import Home from '../screens/home'
-import CreateUserBirthday from '../screens/createUserBirthday'
+import { createStackNavigator } from 'react-navigation'
+import Home from '../screens/Home'
+import UserBirthdayForm from '../screens/UserBirthdayForm'
 
 const AppNavigation = createStackNavigator({
   Home: { screen: Home },
-  CreateUserBirthday: { screen: CreateUserBirthday }
-}, {
-  navigationOptions: { header: null }
+  UserBirthdayForm: { screen: UserBirthdayForm }
 })
 
 export default AppNavigation

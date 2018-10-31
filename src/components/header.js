@@ -8,7 +8,6 @@ import {
 } from 'react-native'
 import PropTypes from 'prop-types'
 
-
 function Header ({ title, right, left, titleColor, backgroundColor }) {
   return (
     <SafeAreaView>

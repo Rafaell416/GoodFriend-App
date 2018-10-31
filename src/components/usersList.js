@@ -7,10 +7,11 @@ import {
 } from 'react-native'
 import PropTypes from 'prop-types'
 import { Feather } from '@expo/vector-icons'
+import { theme } from '../utils'
 
-import TouchableCard from './touchableCard'
-import UserItem from './userItem'
-import Preloader from './preloader'
+import TouchableCard from './TouchableCard'
+import UserItem from './UserItem'
+import Preloader from './Preloader'
 
 export default class UsersList extends Component {
 
@@ -19,15 +20,10 @@ export default class UsersList extends Component {
   _renderItem = ({ item, index }) => {
     if ( index === 0 ) {
       return (
-        <TouchableCard actionToExecute={() => {
-            this.props.navigation.navigate(
-              'CreateUserBirthday',
-              { handleCreateBirthday: this.props.handleCreateBirthday }
-            )
-          }}
+        <TouchableCard actionToExecute={ this.props.handleNavigateToCreateBirthday }
         >
           <View style={styles.addBirthdayView}>
-            <Feather name="plus" size={40} color="#28a996"/>
+            <Feather name="plus" size={40} color={theme.primaryColor}/>
             <Text style={styles.addBirthdayText}>Add Birthday</Text>
           </View>
         </TouchableCard>
@@ -53,9 +49,6 @@ export default class UsersList extends Component {
     )
   }
 
-  componentDidUpdate (prevProps, prevState, snapshot) {
-    //console.log(prevProps, prevState, snapshot)
-  }
 
   render () {
     const { users } = this.props
@@ -91,7 +84,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   addBirthdayText: {
-    color: "#28a996",
+    color: theme.primaryColor,
     marginTop: 10,
     fontWeight: 'bold'
   },

@@ -13,7 +13,6 @@ import { formatDate } from '../utils'
 export default class DatePicker extends Component {
   state = {
     isDateTimePickerVisible: false,
-    selected: false,
     initialText: 'Pick birthday'
   }
 
@@ -23,18 +22,18 @@ export default class DatePicker extends Component {
 
   _handleDatePicked = (date) => {
      const formatedDate = formatDate( date )
-     this.setState({ date: formatedDate, selected: true })
+     this.setState({ date: formatedDate })
      this._hideDateTimePicker()
      this.props.handleOnDatePicked( formatedDate )
    }
 
   render () {
-    const { selected, initialText } = this.state
-    const { value } = this.props
+    const { initialText } = this.state
+    const { value, iconColor } = this.props
     return (
       <View style={styles.container}>
         <View style={styles.iconView}>
-          <Feather name="calendar" size={30} color="#28a996"/>
+          <Feather name="calendar" size={30} color={iconColor}/>
         </View>
         <View style={styles.inputView}>
           <TouchableOpacity style={styles.dateView} onPress={ this._showDateTimePicker }>
