@@ -12,8 +12,9 @@ import ActionButton from '../components/ActionButton'
 import Preloader from '../components/Preloader'
 import { theme } from '../utils'
 import api from '../api'
+import { withApiService } from '../services'
 
-export default class UserBirthdayForm extends Component {
+class UserBirthdayForm extends Component {
   state = {
     first_name: '',
     last_name: '',
@@ -80,20 +81,19 @@ export default class UserBirthdayForm extends Component {
   }
 
   _createBirthday = async () => {
-     this.setState({ loading: true })
-     const { first_name, last_name, birthday } = this.state
-
-     api.createBirthday({ first_name, last_name, birthday })
-     .then(res => {
-       this.props.navigation.state.params.handleCreateBirthday(res)
-       this.setState({ loading: false })
-       this.props.navigation.goBack()
-     })
-     .catch(err => {
-       Alert.alert('There was an error', 'Try again :/')
-       console.log(err)
-     })
-  }
+    this.setState({ loading: true })
+    const { first_name, last_name, birthday } = this.state
+    api.createBirthday({ first_name, last_name, birthday })
+    .then(res => {
+      this.props._createBirthdayInScreen(res)
+      this.setState({ loading: false })
+      this.props.navigation.goBack()
+    })
+    .catch(err => {
+      Alert.alert('There was an error', 'Try again :/')
+      console.log(err)
+    })
+ }
 
   render () {
     const { first_name, last_name, loading, birthday } = this.state
@@ -149,3 +149,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 })
+
+export default withApiService(UserBirthdayForm)
