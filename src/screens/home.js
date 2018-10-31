@@ -7,10 +7,7 @@ import {
 import Header from '../components/Header'
 import UsersList from '../components/UsersList'
 import { addRandomBirthdayToUsers, findAndUpdate, theme } from '../utils'
-import config from '../../config'
-
-import createClient from '../api'
-const api = createClient(config)
+import api from '../api'
 
 
 export default class Home extends Component {

@@ -1,6 +1,17 @@
 'use strict'
 
 import Api from './lib/api'
+import config from '../../config'
 
-const createClient = ( config ) => new Api( config )
-export default createClient
+let apiInstance = null
+
+function createClient ( conf ) {
+  if (!apiInstance) {
+    apiInstance = new Api( conf )
+  }
+  return apiInstance
+}
+
+const api = createClient( config )
+
+export default api
