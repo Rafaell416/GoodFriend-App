@@ -29,11 +29,11 @@ export default class DatePicker extends Component {
 
   render () {
     const { initialText } = this.state
-    const { value } = this.props
+    const { value, iconColor } = this.props
     return (
       <View style={styles.container}>
         <View style={styles.iconView}>
-          <Feather name="calendar" size={30} color="#28a996"/>
+          <Feather name="calendar" size={30} color={iconColor}/>
         </View>
         <View style={styles.inputView}>
           <TouchableOpacity style={styles.dateView} onPress={ this._showDateTimePicker }>

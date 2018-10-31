@@ -10,6 +10,7 @@ import InputField from '../components/InputField'
 import DatePicker from '../components/DatePicker'
 import ActionButton from '../components/ActionButton'
 import Preloader from '../components/Preloader'
+import { theme } from '../utils'
 
 import config from '../../config'
 
@@ -32,7 +33,7 @@ export default class CreateUserBirthday extends Component {
         title={ 
           navigation.state.params.isEditing ? 'Edit Birthday' : 'Create Birthday' 
         } 
-        backgroundColor="#28a996"
+        backgroundColor={theme.primaryColor}
         left= {
           <TouchableIcon
             name="arrow-left"
@@ -108,25 +109,28 @@ export default class CreateUserBirthday extends Component {
           placeholder="First name"
           value={ first_name }
           onChangeText={ first_name => this.setState({ first_name }) }
+          iconColor={ theme.primaryColor }
         />
         <InputField
           icon="user-plus"
           placeholder="Last name"
           value={ last_name }
           onChangeText={ last_name => this.setState({ last_name }) }
+          iconColor={ theme.primaryColor }
         />
         <DatePicker
           value={ birthday }
           handleOnDatePicked={( birthday ) => this.setState({ birthday })}
+          iconColor={ theme.primaryColor }
         />
         <View style={styles.buttonView}>
            {
              loading
-              ? <Preloader size="large" color="#28a996"/>
+              ? <Preloader size="large" color={theme.primaryColor}/>
               : <ActionButton
                 text="SAVE"
                 textColor="white"
-                buttonColor="#ff9234"
+                buttonColor={theme.orange}
                 actionToExecuteWhenPress={ isEditing ? this._updateBirthday : this._createBirthday }
                 disabled={this._areAllInputsFilled()}
               />

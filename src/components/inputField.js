@@ -7,12 +7,12 @@ import {
   StyleSheet
 } from 'react-native'
 
-function InputField ({ icon, value, onChangeText, placeholder, type }) {
+function InputField ({ icon, value, onChangeText, placeholder, type, iconColor }) {
   const secure = type === 'password' ? true : false
   return (
     <View style={styles.container}>
       <View style={styles.iconView}>
-        <Feather name={icon} size={30} color="#28a996"/>
+        <Feather name={icon} size={30} color={iconColor}/>
       </View>
       <View style={styles.inputView}>
         <TextInput

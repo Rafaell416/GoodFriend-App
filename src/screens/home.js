@@ -6,7 +6,7 @@ import {
 } from 'react-native'
 import Header from '../components/Header'
 import UsersList from '../components/UsersList'
-import { addRandomBirthdayToUsers, findAndUpdate } from '../utils'
+import { addRandomBirthdayToUsers, findAndUpdate, theme } from '../utils'
 import config from '../../config'
 
 import createClient from '../api'
@@ -19,7 +19,7 @@ export default class Home extends Component {
   }
 
   static navigationOptions = {
-    header: <Header title="Good Friend" backgroundColor="#28a996"/>
+    header: <Header title="Good Friend" backgroundColor={theme.primaryColor} />
   }
 
   componentWillMount () {

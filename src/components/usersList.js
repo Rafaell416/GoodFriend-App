@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 import PropTypes from 'prop-types'
 import { Feather } from '@expo/vector-icons'
+import { theme } from '../utils'
 
 import TouchableCard from './TouchableCard'
 import UserItem from './UserItem'
@@ -22,7 +23,7 @@ export default class UsersList extends Component {
         <TouchableCard actionToExecute={ this.props.handleNavigateToCreateBirthday }
         >
           <View style={styles.addBirthdayView}>
-            <Feather name="plus" size={40} color="#28a996"/>
+            <Feather name="plus" size={40} color={theme.primaryColor}/>
             <Text style={styles.addBirthdayText}>Add Birthday</Text>
           </View>
         </TouchableCard>
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   addBirthdayText: {
-    color: "#28a996",
+    color: theme.primaryColor,
     marginTop: 10,
     fontWeight: 'bold'
   },
