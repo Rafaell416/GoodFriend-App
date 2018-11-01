@@ -16,7 +16,7 @@ import {
   MenuTrigger,
 } from 'react-native-popup-menu'
 
-const AVATAR_SIZE = 70
+const AVATAR_SIZE = 60
 
 
 function UserItem ({ avatar, first_name, last_name, birthday, id, handleDeleteBirthday, handleUpdateBirthday, handleNavigateToScreen }) {
@@ -26,9 +26,7 @@ function UserItem ({ avatar, first_name, last_name, birthday, id, handleDeleteBi
       onPress={() => handleNavigateToScreen({ 
         screen: 'UserDetail', 
         params: {
-          user: { avatar, first_name, last_name, birthday, id },
-          handleDeleteBirthday, 
-          handleUpdateBirthday
+          user: { avatar, first_name, last_name, birthday, id }
         }
       })}
     >
@@ -66,7 +64,7 @@ const styles = StyleSheet.create({
   avatarView: {
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 10
+    padding: 5
   },
   avatar: {
     height: AVATAR_SIZE,

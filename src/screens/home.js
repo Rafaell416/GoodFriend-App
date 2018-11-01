@@ -3,14 +3,15 @@ import {
   View,
   StyleSheet
 } from 'react-native'
-import Header from '../components/Header'
 import UsersList from '../components/UsersList'
-import { theme } from '../utils'
+import Header from '../components/Header'
 import { withApiService } from '../services'
+import { theme } from '../utils'
 
 class Home extends Component {
-  state = {
-    users: []
+
+  static navigationOptions = {
+    header: <Header title="Good Friend" backgroundColor={theme.primaryColor} /> 
   }
 
   _goToScreen = ({ screen, params }) => {
@@ -24,9 +25,9 @@ class Home extends Component {
         <UsersList
           users={ users }
           handleNavigateToScreen={ this._goToScreen }
-          handleCreateBirthday={ this.props._createBirthdayInScreen }
-          handleDeleteBirthday={ this.props._deleteBirthday }
-          handleUpdateBirthday={ this.props._updateBirthday }
+          // handleCreateBirthday={ this.props._createBirthdayInScreen }
+          // handleDeleteBirthday={ this.props._deleteBirthday }
+          // handleUpdateBirthday={ this.props._updateBirthday }
         />
       </View>
     )

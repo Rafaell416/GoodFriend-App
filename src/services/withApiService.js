@@ -3,8 +3,8 @@ import { Alert } from 'react-native'
 import { addRandomBirthdayToUsers, findAndUpdate } from '../utils'
 import api from '../api'
 
-export function withApiService (WrappedComponent, selectData) {
-  return class extends Component {
+export function withApiService (WrappedComponent) {
+  class Hoc extends Component {
     state = {
       users: [],
       first_name: '',
@@ -14,7 +14,7 @@ export function withApiService (WrappedComponent, selectData) {
       avatar: ''
     }
 
-    componentWillMount () {
+    componentDidMount(){
       this._getUsers()
     }
   
@@ -24,7 +24,23 @@ export function withApiService (WrappedComponent, selectData) {
       this.setState({ users })
     }
 
-    _createBirthdayInScreen = (user) =>  this.setState({ users: [ ...this.state.users, user ] })
+    _createBirthday = (user) => {
+      api.createBirthday(user)
+      .then(res => {
+        this._createBirthdayInScreen(res)
+      })
+      .catch(err => {
+        Alert.alert('There was an error', 'Try again :/')
+        console.log(err)
+      })
+    }
+
+    _createBirthdayInScreen = (user) => {
+      this.setState(
+        { users: [ ...this.state.users, user ] }, 
+        () => this.props.navigation.goBack()
+      )
+    }
 
     _handleDeleteFromScreen = ( uid ) => {
       Alert.alert('Delete birthday', 'Are you sure you want to delete this birthday ?', [
@@ -64,16 +80,19 @@ export function withApiService (WrappedComponent, selectData) {
 
 
     render () {
+      console.log(this.state.users)
       return (
         <WrappedComponent 
-          { ...this.props } 
+          { ...this.props }
           users={ this.state.users } 
           _createBirthday={ this._createBirthday }
-          _createBirthdayInScreen={ this._createBirthdayInScreen }
-          _deleteBirthday={ this._deleteBirthday }
-          _updateBirthday={ this._updateBirthday }
+          // _createBirthdayInScreen={ this._createBirthdayInScreen }
+          // _deleteBirthday={ this._deleteBirthday }
+          // _updateBirthday={ this._updateBirthday }
         />
       )
     }
   }
+  Hoc.navigationOptions = WrappedComponent.navigationOptions
+  return Hoc
 }

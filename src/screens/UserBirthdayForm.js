@@ -4,12 +4,13 @@ import {
   Alert,
   StyleSheet
 } from 'react-native'
-import Header from '../components/Header'
-import TouchableIcon from '../components/TouchableIcon'
 import InputField from '../components/InputField'
 import DatePicker from '../components/DatePicker'
 import ActionButton from '../components/ActionButton'
 import Preloader from '../components/Preloader'
+import Header from '../components/Header'
+import TouchableIcon from '../components/TouchableIcon'
+
 import { theme } from '../utils'
 import api from '../api'
 import { withApiService } from '../services'
@@ -23,6 +24,25 @@ class UserBirthdayForm extends Component {
     uid: '',
     avatar: ''
   }
+
+  static navigationOptions = ({ navigation }) =>  ({
+    header: (
+      <Header 
+        title={ 
+          navigation.state.params.isEditing ? 'Edit Birthday' : 'Create Birthday' 
+        } 
+        backgroundColor={theme.primaryColor}
+        left= {
+          <TouchableIcon
+            name="arrow-left"
+            size={30}
+            color="white"
+            actionToExecuteWhenPress={() => navigation.goBack()}
+          />
+        }
+      />
+    )
+  })
 
   componentWillMount () {
     const { isEditing } = this.props.navigation.state.params
@@ -62,18 +82,20 @@ class UserBirthdayForm extends Component {
   }
 
   _createBirthday = async () => {
-    this.setState({ loading: true })
     const { first_name, last_name, birthday } = this.state
-    api.createBirthday({ first_name, last_name, birthday })
-    .then(res => {
-      this.props._createBirthdayInScreen(res)
-      this.setState({ loading: false })
-      this.props.navigation.goBack()
-    })
-    .catch(err => {
-      Alert.alert('There was an error', 'Try again :/')
-      console.log(err)
-    })
+    this.props._createBirthday({ first_name, last_name, birthday })
+    // this.setState({ loading: true })
+    // const { first_name, last_name, birthday } = this.state
+    // api.createBirthday({ first_name, last_name, birthday })
+    // .then(res => {
+    //   this.props._createBirthdayInScreen(res)
+    //   this.setState({ loading: false })
+    //   this.props.navigation.goBack()
+    // })
+    // .catch(err => {
+    //   Alert.alert('There was an error', 'Try again :/')
+    //   console.log(err)
+    // })
  }
 
   render () {

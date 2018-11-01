@@ -22,7 +22,7 @@ export default class UsersList extends Component {
       return (
         <TouchableCard actionToExecute={ () => this.props.handleNavigateToScreen({
           screen: 'UserBirthdayForm',
-          params: { handleCreateBirthday: this.props.handleCreateBirthday }
+          params: {}
         })}
         >
           <View style={styles.addBirthdayView}>
