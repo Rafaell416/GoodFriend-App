@@ -81,6 +81,10 @@ class UserBirthdayForm extends Component {
     })
   }
 
+  componentWillUnmount() {
+    console.log('UBF - componentWillUnmount')
+  }
+
   _createBirthday = async () => {
     const { first_name, last_name, birthday } = this.state
     this.props._createBirthday({ first_name, last_name, birthday })

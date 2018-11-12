@@ -6,12 +6,22 @@ import {
 import UsersList from '../components/UsersList'
 import Header from '../components/Header'
 import { withApiService } from '../services'
+import { withNavigationFocus } from 'react-navigation';
 import { theme } from '../utils'
 
 class Home extends Component {
 
+  state = {
+    users: []
+  }
+
   static navigationOptions = {
     header: <Header title="Good Friend" backgroundColor={theme.primaryColor} /> 
+  }
+
+  componentWillReceiveProps(nextProps){
+    console.log('Home - componentWillReceiveProps',nextProps )
+    this.setState({ users: nextProps.users })
   }
 
   _goToScreen = ({ screen, params }) => {
@@ -19,13 +29,13 @@ class Home extends Component {
   }
 
   render () {
-    const { users } = this.props
+    const { users } = this.state
     return (
       <View style={styles.container}>
         <UsersList
           users={ users }
           handleNavigateToScreen={ this._goToScreen }
-          // handleCreateBirthday={ this.props._createBirthdayInScreen }
+          //handleCreateBirthday={ this.props._createBirthdayInScreen }
           // handleDeleteBirthday={ this.props._deleteBirthday }
           // handleUpdateBirthday={ this.props._updateBirthday }
         />
@@ -42,4 +52,3 @@ const styles = StyleSheet.create({
 })
 
 export default withApiService(Home)
-
